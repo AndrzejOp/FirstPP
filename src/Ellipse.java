@@ -1,13 +1,17 @@
 import java.util.Locale;
 
-public class Ellipse extends Shape {
-    private Point centerOfE;
-    private double r1,r2;
-    public Ellipse(Style style){
-        super (style);
+public class Ellipse implements Shape {
+    Vec2 center;
+    double rx,ry;
+    public Ellipse(Vec2 center, double rx,double ry){
+        this.rx=rx;
+        this.ry=ry;
+        this.center=center;
     }
-    public String toSvg(){
-        return String.format(Locale.ENGLISH,"<ellipse cx=\"%d\" cy=\"%d\" rx=\"%d\" ry=\"%d\"\n" +
-                "  style=\"%s\"/>",centerOfE.x,centerOfE.y,r1,r2,style.toSvg());
+
+    @Override
+    public String toSvg(String parameters) {
+        return String.format(Locale.ENGLISH,"<ellipse cx=\"%f\" cy=\"%f\" rx=\"%f\" ry=\"%f\" %s />",
+                center.x,center.y,rx,ry,parameters);
     }
 }

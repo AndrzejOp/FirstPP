@@ -1,41 +1,19 @@
+import java.util.Locale;
 
 public class Style {
-    public final String fillColor;
-    public final String strokeColor;
-    public final double strokeWidth;
 
-    Style(String fillColor, String strokeColor, double strokeWidth){
+    public final String fillColor, strokeColor;
+    public final double strokeWidth;
+    public Style(String fillColor, String strokeColor, double strokeWidth) {
         this.fillColor = fillColor;
         this.strokeColor = strokeColor;
         this.strokeWidth = strokeWidth;
     }
+    //style="fill:lime;stroke:purple;stroke-width:1" />
 
-    public String toSvg(){
-        String basic;
-        if(fillColor != null)
-        {
-            basic = "fill: "+fillColor;
-        }
-        else
-        {
-            basic = "fill: transparent";
-        }
-        if(strokeColor != null)
-        {
-            basic += "stroke:"+strokeColor;
-        }
-        else
-        {
-            basic += "stroke:black";
-        }
-        if(strokeWidth != 0)
-        {
-            basic += "stroke-width:"+strokeWidth;
-        }
-        else
-        {
-            basic += "stroke-width:1";
-        }
-        return basic;
+//    return String.format(Locale.ENGLISH,"<polygon points=\"%s\" />", pointsString);
+
+    public String toSVG() {
+        return String.format(Locale.ENGLISH,"style=\"fill:%s;stroke:%s;stroke-width:%f\"", fillColor,strokeColor,strokeWidth);
     }
 }
