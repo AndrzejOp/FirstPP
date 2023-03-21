@@ -14,21 +14,18 @@ public class SvgScene {
         shapes.add(polygon);
     }
 
-    public void setInstance(SvgScene instance) {
-        if(this.instance==null){
-            this.instance=instance;
-        }
-    }
-
     public void saveHtml(String path){
         try {
             FileWriter fw = new FileWriter(path);
             fw.write("<html> <body> <svg width=\"1000\" height=\"1000\">\n");
-            for(var def : defy){
-                fw.write(def+"\n");
-            }
             for(var polygon : shapes){
                 fw.write(polygon.toSvg(" ")+"\n");
+            }
+            if(defy.size()>=0){
+                fw.write("<defs>\n");
+                for(var def : defy)
+                    fw.write(def + "\n");
+                fw.write("</defs>\n");
             }
             fw.write("</svg>\n" +
                     "\n" +
@@ -38,6 +35,12 @@ public class SvgScene {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+    }
+    public static SvgScene getInstance() {
+        if(instance == null)
+            instance = new SvgScene();
+        return instance;
 
     }
 }
